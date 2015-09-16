@@ -2,8 +2,8 @@ var https = require('https'),
     fs = require('fs');
 
 var options = {
-	key: fs.readFileSync('./PrivateKey.pem', 'utf8'),
-	cert: fs.readFileSync('./cert.pem', 'utf8')
+	key: fs.readFileSync('./PrivateKey.pem'),
+	cert: fs.readFileSync('./cert.pem')
 };
 
 fs.readFile('./index.html', function (err, html){
