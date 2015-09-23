@@ -32,6 +32,14 @@
 			
 			var myInterval = setInterval(animate, 1000/60);//Détermine nombre d'images par seconde.
 
+			canvas.addEventListener("click", getCoord);
+
+			function getCoordMouse(event)
+			{
+				var x = event.ClientX;
+				var y = event.ClientY;
+			}
+
 			function animate()
 			{
 				 context.clearRect(0, 0, canvas.width, canvas.height); // Réinitilise l'écran (plus rien d'affiché).
@@ -47,19 +55,19 @@
            				posX = 0+diametreBalle/2;//On repart de gauche
         			}
 
-				if(posX+diametreBalle/2 <= canvas.width)
+				if(posX <= 0+diametreBalle/2)
 				{
 					posX = canvas.width-(diametreBalle/2);//On repart a droite
 				}
 
-        			if(posY+diametreBalle/2 >= canvas.height)//Si on touche le bord du bas ou du haut
+        			if(posY+diametreBalle/2 >= canvas.height)//Si on touche le bord du bas
         			{
-           				posY = 0+diametreBalle/2;//On repart en bas
+           				posY = 0+diametreBalle/2;//On repart en haut
         			}
 
-				if(posY+diametreBalle/2 <= canvas.height)
+				if(posY <= 0+diametreBalle/2) //Si on touche le bord du haut
 				{
-					posY = canvas.height-(diametreBalle/2);//On repart en haut
+					posY = canvas.height-(diametreBalle/2);//On repart en bas
 				}
 
         			//On additionne les vitesses de déplacement avec les positions
