@@ -30,27 +30,37 @@
 			var vitesseX = 6;
 			var vitesseY = 6;
 			
-			var myInterval = setInterval(animate, 1000/60);
+			var myInterval = setInterval(animate, 1000/60);//Détermine nombre d'images par seconde.
 
 			function animate()
 			{
-				 context.clearRect(0, 0, canvas.width, canvas.height);
+				 context.clearRect(0, 0, canvas.width, canvas.height); // Réinitilise l'écran (plus rien d'affiché).
         			//Tracé de la balle
         			context.beginPath();
         			context.arc(posX, posY, diametreBalle/2, 0, Math.PI*2);
         			context.fill();
 
         			//On va vérifier si la balle à toucher l'un des bords du canvas.
-
-        			if(posX+diametreBalle/2 >= canvas.width || posX <= 0+diametreBalle/2)//Si on touche le bord gauche ou droit
+		
+        			if(posX+diametreBalle/2 >= canvas.width)//Si on touche le bord droit
         			{
-           				 vitesseX *= -1;//On inverse la vitesse de déplacement sur l'axe horizontal.
+           				posX = 0+diametreBalle/2;//On repart de gauche
         			}
 
-        			if(posY+diametreBalle/2 >= canvas.height || posY <= 0+diametreBalle/2)//Si on touche le bord du bas ou du haut
+				if(posX+diametreBalle/2 <= canvas.width)
+				{
+					posX = canvas.width-(diametreBalle/2);//On repart a droite
+				}
+
+        			if(posY+diametreBalle/2 >= canvas.height)//Si on touche le bord du bas ou du haut
         			{
-           				vitesseY *= -1;//On inverse la vitesse de déplacement sur l'axe vertical.
+           				posY = 0+diametreBalle/2;//On repart en bas
         			}
+
+				if(posY+diametreBalle/2 <= canvas.height)
+				{
+					posY = canvas.height-(diametreBalle/2);//On repart en haut
+				}
 
         			//On additionne les vitesses de déplacement avec les positions
         			posX += vitesseX;
