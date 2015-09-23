@@ -3,8 +3,17 @@
 	<head>
 	
 		<title>MultiSnake</title>
+		<script type="text/javascript" src="js/paper.js"></script>
 	</head>
 	<body>
-		<script type="text/javascript" src="Paper.js"/>
+		<canvas id="canvas" width="1000" height="1000"></canvas>
+		<script type="text/javascript" language="JavaScript" canvas="canvas">
+			  var canvas = document.querySelector('#canvas');
+			  var context = canvas.getContext('2d');
+			  context.fillStyle="#FF4422"
+			  context.beginPath();
+			  context.arc(500, 500, 20, 0, 2 * Math.PI);
+			  context.fill();
+		</script>
 	</body>
 </html>
