@@ -1,81 +1,36 @@
-<!DOCTYPE "html">
+<!DOCTYPE html>
 <html>
 	<head>
-	
-		<title>MultiSnake</title>
-		<script type="text/javascript" src="js/paper.js"></script>
+		<script type="text/javascript" src="./paper-full.js"></script>
+			<script type="text/paperscript" canvas="monCanvas">
+
+					var diamBalle = 30;
+					var posX = Point.random()*view.size;
+					var posY = Point.random()*view.size;
+
+					var monPoint = new Point(posX, posY);
+					var path = new Path.Circle({
+					center: monPoint,
+					radius: diamBalle/2,
+					fillColor: 'red'
+					});
+				
+					var destination = Point.random() * view.size;
+
+					var PosClick;
+					function onMouseUp(event){
+						posClick = new Path();
+						posClick.add(event.downPoint); //Releve la position du bouton vers le bas.
+						destination = posClick.position;
+					}
+
+					function onFrame(event) {
+						var vector = destination - path.position;
+						path.position += vector / 30;
+					}
+			</script>
 	</head>
-	<body>
-		<canvas id="canvas" width="1200" height="750" style="border: 1px solid black"></canvas>
-		<script type="text/javascript" language="JavaScript" canvas="canvas">
-		window.onload = function()
-		{
-			var canvas = document.getElementById("canvas");
-    			if(!canvas)
-    			{
-       				 alert("Impossible de récupérer le canvas");
-        			return;
-    			}
-
-    			var context = canvas.getContext("2d");
-    			if(!context)
-    			{
-        		alert("Impossible de récupérer le context");
-        		return;
-    			}
-
-		 	var diametreBalle = 50;
-			var posX = 1+diametreBalle/2;
-			var posY = 1+diametreBalle/2;
-			var vitesseX = 6;
-			var vitesseY = 6;
-			
-			var myInterval = setInterval(animate, 1000/60);//Détermine nombre d'images par seconde.
-
-			canvas.addEventListener("click", getCoord);
-
-			function getCoordMouse(event)
-			{
-				var x = event.ClientX;
-				var y = event.ClientY;
-			}
-
-			function animate()
-			{
-				 context.clearRect(0, 0, canvas.width, canvas.height); // Réinitilise l'écran (plus rien d'affiché).
-        			//Tracé de la balle
-        			context.beginPath();
-        			context.arc(posX, posY, diametreBalle/2, 0, Math.PI*2);
-        			context.fill();
-
-        			//On va vérifier si la balle à toucher l'un des bords du canvas.
-		
-        			if(posX+diametreBalle/2 >= canvas.width)//Si on touche le bord droit
-        			{
-           				posX = 0+diametreBalle/2;//On repart de gauche
-        			}
-
-				if(posX <= 0+diametreBalle/2)
-				{
-					posX = canvas.width-(diametreBalle/2);//On repart a droite
-				}
-
-        			if(posY+diametreBalle/2 >= canvas.height)//Si on touche le bord du bas
-        			{
-           				posY = 0+diametreBalle/2;//On repart en haut
-        			}
-
-				if(posY <= 0+diametreBalle/2) //Si on touche le bord du haut
-				{
-					posY = canvas.height-(diametreBalle/2);//On repart en bas
-				}
-
-        			//On additionne les vitesses de déplacement avec les positions
-        			posX += vitesseX;
-        			posY += vitesseY;
-			}
-
-		}
-		</script>
-	</body>
+<body>
+	<canvas id = "monCanvas" width="1280" height="500" style="background:black" resize></canvas>
+</body>
 </html>
