@@ -1,56 +1,61 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<script type="text/javascript" src="./paper-full.js"></script>
-			<script type="text/paperscript" canvas="monCanvas">
+ <head>
+  <script type="text/javascript" src="./paper-full.js"></script>
+   <script type="text/paperscript" canvas="monCanvas">
 
-					var diamBalle = 40;
-					var posX = Point.random()*view.size;
-					var posY = Point.random()*view.size;
-					var vitesseX = 5;
-					var vitesseY = 5;
-					monCanvas.style.border = "black 2px solid";
+    var diamBalle = 40;
+    var posX = Point.random()*view.size;
+    var posY = Point.random()*view.size;
+    var vitesseX = 5;
+    var vitesseY = 5;
+    monCanvas.style.border = "black 2px solid";
 
-					var monPoint = new Point(posX, posY);
-					var path = new Path.Circle({
-					center: monPoint,
-					radius: diamBalle/2,
-					fillColor: 'black'
-					});
+    var monPoint = new Point(posX, posY);
+    var path = new Path.Circle({
+    center: monPoint,
+    radius: diamBalle/2,
+    fillColor: 'black'
+    });
 				
-					var destination = Point.random() * view.size;
+    var destination = Point.random() * view.size;
 
-					var PosClick;
-					function onMouseUp(event){
-						posClick = new Path();
-						posClick.add(event.downPoint); //Releve la position du bouton vers le bas.
-						destination = posClick.position;
-					}
+    var PosClick;
+    function onMouseUp(event){
+    	posClick = new Path();
+     	posClick.add(event.downPoint); //Releve la position du bouton vers le bas.
+	destination = posClick.position;
+    }
 
-					function onFrame(event) {
-						var vector = destination - path.position;
-						path.position += vector/40;
-					}
-			</script>
-	</head>
-<body>
-	<script src="/socket.io/socket.io.js"></script>
-        <script>
+    function onFrame(event) {
+	var vector = destination - path.position;
+	path.position += vector/40;
+    }
+   </script>
+ </head>
+ <body>
+  <script src="/socket.io/socket.io.js"></script>
+   <script>
 
-	    //On se connecte au Websocket de l'adresse ...
-            var socket = io.connect('https://localhost:8700');
+    //On se connecte au Websocket de l'adresse ...
+    var socket = io.connect('https://localhost:8700');
 
-		socket.on('message', function(message) {
-			alert(message);
-		})
+    socket.on('message', function(message) {
+    	alert(message);
+    })
 
-	    // On demande le pseudo au visiteur...
-            var pseudo = prompt('Quel est votre pseudo ?');
-            // Et on l'envoie avec le signal "petit_nouveau" (pour le différencier de "message")
-            socket.emit('nouveau_client', pseudo);
+    socket.on('NvClient', function(pseudo) {
+    	alert(pseudo);
+        //$('#Nv_client').prepend('<p><em>' + pseudo + ' a rejoint la partie !</em></p>');
+    })
+
+    // On demande le pseudo au visiteur...
+    var pseudo = prompt('Quel est votre pseudo ?');
+    // Et on l'envoie avec le signal "petit_nouveau" (pour le différencier de "message")
+    socket.emit('nouveau_client', pseudo);
 		
-        </script>
-	<center>MultiSnake</center>
-	<canvas id = "monCanvas" width="1280" height="630" style="background:white" resize></canvas>
-</body>
+   </script>
+   <center>MultiSnake</center>
+   <canvas id = "monCanvas" width="1280" height="630" style="background:white" resize></canvas>
+ </body>
 </html>
