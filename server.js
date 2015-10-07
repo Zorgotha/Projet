@@ -1,7 +1,9 @@
 //Serveur https
+var require;
+var __dirname;
 var fs = require('fs');
 var https = require('https');
-var privateKey  = fs.readFileSync('./key.pem');
+var privateKey = fs.readFileSync('./key.pem');
 var certificate = fs.readFileSync('./cert.pem');
 
 var credentials = {key: privateKey, cert: certificate};
@@ -19,18 +21,15 @@ var io = require('socket.io').listen(httpsServer);
 // Quand on client se connecte, on le note dans la console
 io.sockets.on('connection', function (socket) {
 
-    socket.on('nouveau_client', function(pseudo) {
-        socket.pseudo = pseudo;			// Récupère le pseudo envoyé du client au serveur
-	console.log(pseudo + ' est connecté !');
-	socket.emit('message', 'Vous êtes connecté !'); // Message connection
-	socket.broadcast.emit('NvClient', pseudo + ' vient de se connecter !'); //Affichage qui s'est connecté
+    "use strict";
+    socket.on('nouveau_client', function (pseudo) {
+        socket.pseudo = pseudo; // Récupère le pseudo envoyé du client au serveur
+        console.log(pseudo + ' est connecté !');
+        socket.emit('message', 'Vous êtes connecté !'); // Message connection
+        socket.broadcast.emit('NvClient', pseudo + ' vient de se connecter !'); //Affichage qui s'est connecté
     });
-
-    socket.on('disconnect', function(socket){
-	console.log('un client est déconnecté !');
+    socket.on('disconnect', function () {
+        console.log('un client est déconnecté !');
     });
 });
-
-
-// spin up server 
-httpsServer.listen(8700);
+httpsServer.listen(8700); //spin up server
