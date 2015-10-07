@@ -23,7 +23,7 @@ io.sockets.on('connection', function (socket) {
         socket.pseudo = pseudo;			// Récupère le pseudo envoyé du client au serveur
 	console.log(pseudo + ' est connecté !');
 	socket.emit('message', 'Vous êtes connecté !'); // Message connection
-	socket.broadcast.emit('message', pseudo + ' vient de se connecter !'); //Affichage qui s'est connecté
+	socket.broadcast.emit('NvClient', pseudo + ' vient de se connecter !'); //Affichage qui s'est connecté
     });
 
     socket.on('disconnect', function(socket){
