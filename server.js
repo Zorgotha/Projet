@@ -13,5 +13,17 @@ app.use(express.static(__dirname));
 var httpsServer = https.createServer(credentials, app);
 console.log('HTTPS Server listening');
 
+// Chargement de socket.io
+var io = require('socket.io').listen(httpsServer);
+
+// Quand on client se connecte, on le note dans la console
+io.sockets.on('connection', function (socket) {
+    console.log('Un client est connecté !');
+});
+
+io.sockets.on('connection', function (socket) {
+        socket.emit('message', 'Vous êtes bien connecté !');
+});
+
 // spin up server
 httpsServer.listen(8700);
