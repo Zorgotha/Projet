@@ -18,12 +18,19 @@ var io = require('socket.io').listen(httpsServer);
 
 // Quand on client se connecte, on le note dans la console
 io.sockets.on('connection', function (socket) {
-    console.log('Un client est connecté !');
+
+    socket.on('nouveau_client', function(pseudo) {
+        socket.pseudo = pseudo;			// Récupère le pseudo envoyé du client au serveur
+	console.log(pseudo + ' est connecté !');
+	socket.emit('message', 'Vous êtes connecté !'); // Message connection
+	socket.broadcast.emit('message', pseudo + ' vient de se connecter !'); //Affichage qui s'est connecté
+    });
+
+    socket.on('disconnect', function(socket){
+	console.log('un client est déconnecté !');
+    });
 });
 
-io.sockets.on('connection', function (socket) {
-        socket.emit('message', 'Vous êtes bien connecté !');
-});
 
-// spin up server
+// spin up server 
 httpsServer.listen(8700);
