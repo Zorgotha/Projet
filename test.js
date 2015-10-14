@@ -19,8 +19,8 @@ console.log(v.longueur());
 
 var snake = modele.snake;
 var s = new snake(6);
-console.log(s.direction(pnt,pnt2));
-console.log(s.tete(6,5, 7));
+console.log(s.Direct(pnt,pnt2));
+console.log(s.Tete(6,5, 7));
 console.log(s.corps(5,7, 5));
 console.log(JSON.stringify(s));
 
