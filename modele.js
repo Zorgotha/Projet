@@ -25,10 +25,10 @@ function circle(x , y, rayon){
 
 function snake(count){
 	this.tabCorps = [];
-	this.direction = function(a,b){
-		this.direction = new vector(a,b)
+	this.Direct = function(a,b){
+		this.direction = new vector(a,b);
 	}
-	this.tete = function(x,y,r){
+	this.Tete = function(x,y,r){
 		this.tete = new circle(x,y,r);
 	}
 
@@ -37,6 +37,10 @@ function snake(count){
 			this.tabCorps[i] = new circle(x-i,y-i, r);
 		}
 	}
+}
+
+function EtatJeu(){
+	
 }
 
 module.exports.vector = vector;
