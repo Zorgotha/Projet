@@ -36,23 +36,22 @@
  <body>
   <script src="/socket.io/socket.io.js"></script>
    <script>
+	
+	    //On se connecte au Websocket de l'adresse ...
+	    var socket = io.connect('https://localhost:8700');
 
-    //On se connecte au Websocket de l'adresse ...
-    var socket = io.connect('https://localhost:8700');
+	    socket.on('message', function(message) {
+	    	alert(message);
+	    })
 
-    socket.on('message', function(message) {
-    	alert(message);
-    })
+	    socket.on('NvClient', function(pseudo) {
+	    	alert(pseudo);
+	    })
 
-    socket.on('NvClient', function(pseudo) {
-    	alert(pseudo);
-        //$('#Nv_client').prepend('<p><em>' + pseudo + ' a rejoint la partie !</em></p>');
-    })
-
-    // On demande le pseudo au visiteur...
-    var pseudo = prompt('Quel est votre pseudo ?');
-    // Et on l'envoie avec le signal "petit_nouveau" (pour le différencier de "message")
-    socket.emit('nouveau_client', pseudo);
+	    // On demande le pseudo au visiteur...
+	    var pseudo = prompt('Quel est votre pseudo ?');
+	    // Et on l'envoie avec le signal "petit_nouveau" (pour le différencier de "message")
+	    socket.emit('nouveau_client', pseudo);
 		
    </script>
    <center>MultiSnake</center>
