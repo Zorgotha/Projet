@@ -17,11 +17,13 @@ console.log('HTTPS Server listening');
 
 // Chargement de socket.io
 var io = require('socket.io').listen(httpsServer);
+var nbrUsers = 0;
 
-// Quand on client se connecte, on le note dans la console
+// Quand on client se connecte
 io.sockets.on('connection', function (socket) {
-
+    
     "use strict";
+    nbrUsers++; // Compter le nb de connexion
     socket.on('nouveau_client', function (pseudo) {
         socket.pseudo = pseudo; // Récupère le pseudo envoyé du client au serveur
         console.log(pseudo + ' est connecté !');
@@ -29,6 +31,7 @@ io.sockets.on('connection', function (socket) {
         socket.broadcast.emit('NvClient', pseudo + ' vient de se connecter !'); //Affichage qui s'est connecté
     });
     socket.on('disconnect', function () {
+	nbrUsers--; // COmpter le nb de joueurs apres les decos.
         console.log('un client est déconnecté !');
     });
 });
