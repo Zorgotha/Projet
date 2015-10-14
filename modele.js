@@ -3,6 +3,9 @@ module.exports.x = 100;
 function point(x,y){
 	this.x=x;
 	this.y=y;
+	this.toString = function(){
+		return 'x: ' + this.x + ' y: '+ this.y;
+	};
 }
 
 function vector(a,b){
@@ -20,9 +23,20 @@ function circle(x , y, rayon){
 	this.rayon = rayon;
 }
 
-function snake(x,y,x1,y1){
-	//this.corps = new circle[];
-	this.direction = new vector(new point(x,y),new point(x1,y1));
+function snake(count){
+	this.tabCorps = [];
+	this.direction = function(a,b){
+		this.direction = new vector(a,b)
+	}
+	this.tete = function(x,y,r){
+		this.tete = new circle(x,y,r);
+	}
+
+	this.corps = function(x,y,r){
+		for(var i=1; i<= count; i++){
+			this.tabCorps[i] = new circle(x-i,y-i, r);
+		}
+	}
 }
 
 module.exports.vector = vector;
