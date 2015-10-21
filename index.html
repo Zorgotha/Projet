@@ -35,25 +35,7 @@
  </head>
  <body>
   <script src="/socket.io/socket.io.js"></script>
-   <script>
-	
-	    //On se connecte au Websocket de l'adresse ...
-	    var socket = io.connect('https://localhost:8700');
-
-	    socket.on('message', function(message) {
-	    	alert(message);
-	    })
-
-	    socket.on('NvClient', function(pseudo) {
-	    	alert(pseudo);
-	    })
-
-	    // On demande le pseudo au visiteur...
-	    var pseudo = prompt('Quel est votre pseudo ?');
-	    // Et on l'envoie avec le signal "petit_nouveau" (pour le différencier de "message")
-	    socket.emit('nouveau_client', pseudo);
-		
-   </script>
+  <script src="./client.js"></script>
    <center>MultiSnake</center>
    <canvas id = "monCanvas" width="1280" height="630" style="background:white" resize></canvas>
  </body>
