@@ -1,11 +1,12 @@
 var socket = io.connect('https://localhost:8700');
 
-socket.on('click', function (data) {
-    socket.emit('myClick',data);
+socket.on('click', function (event) {
+    socket.emit('myClick',event);
 })
 
 socket.on('myClick', function(data){
-	//Redessiner le canvas pour chaque client.
+    //Redessiner le canvas pour chaque client.
+    
 })
 
 socket.on('message', function(message) {
