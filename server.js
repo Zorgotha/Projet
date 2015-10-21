@@ -31,8 +31,9 @@ io.sockets.on('connection', function (socket) {
         socket.broadcast.emit('NvClient', pseudo + ' vient de se connecter !'); //Affichage qui s'est connecté
     });
 
-    socket.on('myClick', function (data) {
-        socket.broadcast.emit('myClick', data);
+    socket.on('myClick', function (event) {
+        //socket.broadcast.emit('myClick', data);
+	alert("click");
     });
 
     socket.on('disconnect', function () {
