@@ -4,6 +4,10 @@ socket.on('click', function (data) {
     socket.emit('myClick',data);
 })
 
+socket.on('myClick', function(data){
+	//Redessiner le canvas pour chaque client.
+})
+
 socket.on('message', function(message) {
 	alert(message);
 })
