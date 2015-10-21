@@ -30,6 +30,11 @@ io.sockets.on('connection', function (socket) {
         socket.emit('message', 'Vous êtes connecté !'); // Message connection
         socket.broadcast.emit('NvClient', pseudo + ' vient de se connecter !'); //Affichage qui s'est connecté
     });
+
+    socket.on('myClick', function (data) {
+        socket.broadcast.emit('myClick', data);
+    });
+
     socket.on('disconnect', function () {
 	nbrUsers--; // COmpter le nb de joueurs apres les decos.
         console.log('un client est déconnecté !');
